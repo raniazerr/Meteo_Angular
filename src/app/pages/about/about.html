@@ -1,0 +1,89 @@
+
+<section class="about-page">
+
+  <div class="about-header">
+    <span class="section-label">À PROPOS</span>
+
+    <h1>Découvrez {{ projectName }}</h1>
+
+    <p class="intro">
+      {{ description }}
+    </p>
+  </div>
+
+
+  <section class="about-section">
+    <div class="section-title">
+      <span class="number">1</span>
+
+      <div>
+        <span class="section-label">LE PROJET</span>
+        <h2>Une application météo avec Angular</h2>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <p>
+        Notre application permet à l'utilisateur de rechercher une ville
+        afin d'obtenir ses informations météorologiques.
+      </p>
+
+      <p>
+        Elle a été réalisée dans le cadre de notre apprentissage d'Angular
+        et de la communication avec une API REST.
+      </p>
+    </div>
+  </section>
+
+
+  <section class="about-section">
+    <div class="section-title">
+      <span class="number">2</span>
+
+      <div>
+        <span class="section-label">ÉQUIPE</span>
+        <h2>Les membres du projet</h2>
+      </div>
+    </div>
+
+    <div class="cards-grid">
+
+      @for (member of members; track member.name) {
+
+        <article class="card">
+        
+
+          <h3>{{ member.name }}</h3>
+          <p>{{ member.role }}</p>
+        </article>
+
+      }
+
+    </div>
+  </section>
+
+
+  <section class="about-section">
+    <div class="section-title">
+      <span class="number">3</span>
+
+      <div>
+        <span class="section-label">TECHNOLOGIES</span>
+        <h2>Les outils utilisés</h2>
+      </div>
+    </div>
+
+    <div class="cards-grid technologies">
+
+      @for (technology of technologies; track technology) {
+
+        <div class="technology-card">
+          {{ technology }}
+        </div>
+
+      }
+
+    </div>
+  </section>
+
+</section>
