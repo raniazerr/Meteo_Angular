@@ -1,0 +1,20 @@
+<form #searchForm="ngForm" (ngSubmit)="rechercher()" class="search-bar">
+    <div class="search-ville">
+        <input 
+            type="text" 
+            name="ville"
+            [(ngModel)]="nomVille" 
+            required
+            #villeInput="ngModel"
+            placeholder="Rechercher une ville...">
+        <button type="submit">🔍</button>
+    </div>
+    <div class="search-date">
+        <span>📅</span>
+        <input type="date" #dateInput [min]="dateMin" [max]="dateMax" (change)="date = dateInput.value">
+    </div>
+</form>
+
+<div *ngIf="erreurVille" class="erreur-message">
+    ⚠️ {{ erreurVille }}
+</div>
