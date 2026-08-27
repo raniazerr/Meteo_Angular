@@ -29,4 +29,10 @@ export class WeatherService {
         }))
       );
   }
+
+   getForecast(city: string): Observable<any> {
+    return this.http.get<any>(
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${this.apiKey}&lang=fr&units=metric`
+    );
+  }
 }

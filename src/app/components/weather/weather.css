@@ -91,3 +91,74 @@
     font-size: 34px;
   }
 }
+
+/* =========================
+   PRÉVISIONS MÉTÉO
+========================= */
+
+.forecast-section {
+  max-width: 900px;
+  margin: 50px auto;
+}
+
+.forecast-section h2 {
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 26px;
+  color: #1d1d2f;
+}
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+}
+
+.forecast-card {
+  background-color: #ffffff;
+  border: 1px solid #d9d9e2;
+  border-radius: 12px;
+  padding: 20px 12px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.forecast-card img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+
+.forecast-card p {
+  margin: 8px 0;
+}
+
+.forecast-card p:first-child {
+  font-size: 14px;
+  color: #666675;
+}
+
+.forecast-card p:nth-of-type(2) {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1d1d2f;
+}
+
+.forecast-card p:last-child {
+  color: #666675;
+  text-transform: capitalize;
+}
+
+/* Responsive des prévisions */
+
+@media (max-width: 800px) {
+  .forecast-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .forecast-grid {
+    grid-template-columns: 1fr;
+  }
+}
