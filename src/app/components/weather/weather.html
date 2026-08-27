@@ -1,0 +1,13 @@
+<div>
+    <p>{{ weather()?.city }} ({{ weather()?.country }})</p>
+    <div>
+        <img src="https://openweathermap.org/img/wn/{{weather()?.icon}}@2x.png" alt="Icône météo"> // weather()?.weather.icon
+        <p>{{ weather()?.temperature }}°C</p>
+        <p>{{ weather()?.description}}</p>
+    </div>
+    <div>
+        <p>Ressenti : {{ weather()?.feelsLike }}°C</p>
+        <p>Humidité : {{ weather()?.humidity }}%</p>
+        <p>Vent : {{ weather()?.windSpeed }} km/h</p>
+    </div>
+</div>
