@@ -1,12 +1,19 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-
+import { Component, OnInit } from '@angular/core';
+import { WeatherService } from './services/weather.service';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
-  protected readonly title = signal('Angular_meteo');
+
+export class App implements OnInit {
+
+  constructor(private weatherService: WeatherService) {}
+
+  ngOnInit(): void {
+    this.weatherService.getWeather('Paris').subscribe({
+      next: (data) => console.log('Données reçues :', data),
+      error: (err) => console.error('Erreur :', err)
+    });
+  }
 }
