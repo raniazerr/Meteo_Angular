@@ -1,13 +1,31 @@
-<div>
-    <p>{{ weather()?.city }} ({{ weather()?.country }})</p>
+@if (loading()) {
+  <p>Chargement de la météo...</p>
+}
+
+@if (error()) {
+  <p>{{ error() }}</p>
+}
+
+@if (weather(); as data) {
+  <div class="weather-card">
+
+    <p>{{ data.city }} ({{ data.country }})</p>
+
     <div>
-        <img src="https://openweathermap.org/img/wn/{{weather()?.icon}}@2x.png" alt="Icône météo"> // weather()?.weather.icon
-        <p>{{ weather()?.temperature }}°C</p>
-        <p>{{ weather()?.description}}</p>
+      <img
+        [src]="'https://openweathermap.org/img/wn/' + data.icon + '@2x.png'"
+        [alt]="data.description"
+      >
+
+      <p>{{ data.temperature }}°C</p>
+      <p>{{ data.description }}</p>
     </div>
+
     <div>
-        <p>Ressenti : {{ weather()?.feelsLike }}°C</p>
-        <p>Humidité : {{ weather()?.humidity }}%</p>
-        <p>Vent : {{ weather()?.windSpeed }} km/h</p>
+      <p>Ressenti : {{ data.feelsLike }}°C</p>
+      <p>Humidité : {{ data.humidity }}%</p>
+      <p>Vent : {{ data.windSpeed }} m/s</p>
     </div>
-</div>
+
+  </div>
+}
