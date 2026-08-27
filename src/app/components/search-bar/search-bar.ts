@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-
+import { map, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-search-bar',
@@ -14,7 +15,7 @@ export class SearchBar {
   nomVille: string = '';
   erreurVille: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private http :HttpClient) {}
   
   rechercher() {
     if (!this.nomVille || this.nomVille.trim() === '') {
@@ -25,4 +26,22 @@ export class SearchBar {
 
     this.router.navigate(['/weather', this.nomVille.trim()]);
   }
+
+  localiser(): void {
+  navigator.geolocation.getCurrentPosition(position => {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+
+    this.http.get<any>(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`
+    ).subscribe(data => {
+      const ville = data.address.city || data.address.town || data.address.village;
+
+      console.log('Ville détectée :', ville);
+
+      this.nomVille = ville;
+      this.router.navigate(['/weather', this.nomVille.trim()]);
+    });
+  });
+}
 }
