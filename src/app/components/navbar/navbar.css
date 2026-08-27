@@ -13,6 +13,7 @@
     font-size: 1.5rem;
     font-weight: bold;  
     color: #1a2f55;
+    text-decoration: none;
 }
 .navbar-links .title span {
     color: gray;
@@ -20,10 +21,10 @@
 
 .navbar-links nav {
     display: flex;
-    gap: 1.25rem;
+    gap: 1rem;
 }
 
-.navbar-links a {
+.navbar-links a:not(.title) {
     padding: 10px 18px;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 12px;
@@ -32,6 +33,7 @@
     font-size: 1rem;
     font-weight: 500;
     transition: background 0.2s ease, color 0.2s ease;
+    border: 1px solid #1a2f55;
 }
 
 /* Hover */
