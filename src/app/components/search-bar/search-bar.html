@@ -10,7 +10,10 @@
         <button type="submit">🔍</button>
     </div>
 </form>
-<button (click)="localiser()">Meteo loc</button>
+<button type="button" (click)="localiser()" [disabled]="chargement">
+    <span *ngIf="!chargement">📍 Ma position</span>
+    <span *ngIf="chargement" class="spinner"></span>
+</button>
 <div *ngIf="erreurVille" class="erreur-message">
     ⚠️ {{ erreurVille }}
 </div>

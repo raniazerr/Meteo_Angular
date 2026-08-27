@@ -14,8 +14,9 @@ import { HttpClient } from '@angular/common/http';
 export class SearchBar {
   nomVille: string = '';
   erreurVille: string = '';
+  chargement: boolean = false;
 
-  constructor(private router: Router, private http :HttpClient) {}
+  constructor(private router: Router, private http: HttpClient) {}
   
   rechercher() {
     if (!this.nomVille || this.nomVille.trim() === '') {
@@ -28,20 +29,33 @@ export class SearchBar {
   }
 
   localiser(): void {
-  navigator.geolocation.getCurrentPosition(position => {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
+    this.chargement = true;
+    this.erreurVille = '';
 
-    this.http.get<any>(
-      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`
-    ).subscribe(data => {
-      const ville = data.address.city || data.address.town || data.address.village;
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
 
-      console.log('Ville détectée :', ville);
-
-      this.nomVille = ville;
-      this.router.navigate(['/weather', this.nomVille.trim()]);
-    });
-  });
-}
+        this.http.get<any>(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`
+        ).subscribe({
+          next: data => {
+            const ville = data.address.city || data.address.town || data.address.village;
+            this.nomVille = ville;
+            this.chargement = false;
+            this.router.navigate(['/weather', this.nomVille.trim()]);
+          },
+          error: () => {
+            this.chargement = false;
+            this.erreurVille = "Impossible de récupérer la ville.";
+          }
+        });
+      },
+      () => {
+        this.chargement = false;
+        this.erreurVille = "Impossible d'accéder à votre position.";
+      }
+    );
+  }
 }
