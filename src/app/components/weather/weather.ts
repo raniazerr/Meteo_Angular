@@ -15,6 +15,10 @@ export class Weather implements OnInit {
   private weatherService = inject(WeatherService);
 
   weather = signal<WeatherModel | null>(null);
+
+  // Prévisions météo
+  forecast = signal<any[]>([]);
+
   loading = signal(false);
   error = signal('');
 
@@ -28,6 +32,7 @@ export class Weather implements OnInit {
 
     this.loading.set(true);
 
+    // Météo actuelle
     this.weatherService.getWeather(city).subscribe({
       next: (data) => {
         this.weather.set(data);
@@ -48,6 +53,20 @@ export class Weather implements OnInit {
             'Impossible de récupérer les données météo.'
           );
         }
+      }
+    });
+
+    // Pour la prévisions météo
+    this.weatherService.getForecast(city).subscribe({
+      next: (data) => {
+        this.forecast.set(data.list);
+      },
+
+      error: (err) => {
+        console.error(
+          'Impossible de récupérer les prévisions météo.',
+          err
+        );
       }
     });
   }

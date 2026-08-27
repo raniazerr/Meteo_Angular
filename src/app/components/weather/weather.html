@@ -29,3 +29,34 @@
 
   </div>
 }
+
+@if (forecast().length > 0) {
+  <section class="forecast-section">
+
+    <h2>Prévisions météo</h2>
+
+    <div class="forecast-grid">
+
+      @for (item of forecast().slice(0, 5); track item.dt) {
+
+        <div class="forecast-card">
+
+          <p>{{ item.dt_txt }}</p>
+
+          <img
+            [src]="'https://openweathermap.org/img/wn/' + item.weather[0].icon + '@2x.png'"
+            [alt]="item.weather[0].description"
+          >
+
+          <p>{{ item.main.temp }}°C</p>
+
+          <p>{{ item.weather[0].description }}</p>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+}
