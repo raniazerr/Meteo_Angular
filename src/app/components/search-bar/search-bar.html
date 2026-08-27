@@ -9,10 +9,6 @@
             placeholder="Rechercher une ville...">
         <button type="submit">🔍</button>
     </div>
-    <div class="search-date">
-        <span>📅</span>
-        <input type="date" #dateInput [min]="dateMin" [max]="dateMax" (change)="date = dateInput.value">
-    </div>
 </form>
 
 <div *ngIf="erreurVille" class="erreur-message">
