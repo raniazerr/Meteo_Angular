@@ -1,59 +1,121 @@
 # AngularMeteo
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.16.
+## Présentation
 
-## Development server
+### Le projet
 
-To start a local development server, run:
+MétéoLive est un projet académique construit avec Angular. Il interroge l’API OpenWeatherMap pour afficher la météo d’une ville choisie par l’utilisateur, ainsi que les prévisions, ou bien la météo basée sur sa localisation actuelle.
 
-```bash
-ng serve
-```
+### Les membres
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Nous avons travaillé à quatre sur ce projet :
 
-## Code scaffolding
+-   [Binti-Warda MOUZDA](https://github.com/bwmouzda-g)
+-   [Rania Zeramdini](https://github.com/raniazerr)
+-   [Nolan Lefebvre](https://github.com/NolanLefebvre)
+-   [Thomas Rivoire](https://github.com/thomasr10)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Les technologies
 
-```bash
-ng generate component component-name
-```
+Pour ce projet nous avons utilisé les technologies suivantes : 
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+-   TypeScript
+-   Angular
+-   HTML / CSS
+-   OpenWeather API
+-   Postman
 
-```bash
-ng generate --help
-```
+## Installation
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### Cloner le dépôt GitHub
 
 ```bash
-ng test
+git clone https://github.com/raniazerr/Meteo_Angular.git
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### Ouvrir le projet
 
 ```bash
-ng e2e
+cd Meteo_angular
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+```bash
+code .
+```
 
-## Additional Resources
+### Installer les dépendances
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npm install
+```
+### Créer le dossier environments
+
+```bash
+ng g environments
+```
+Une fois le dossier créé, ajoutez votre clé API dans le dossier `/environment.development.ts` :
+
+```
+API_KEY: 'MON_API_KEY'
+```
+
+### Démarrer le serveur
+
+```bash
+ng serve --open
+```
+
+## Les fonctionnalités
+
+## Fonctionnalités obligatoires
+
+- ✅ Page d'accueil (`/home`) avec présentation de l'application et formulaire de recherche
+- ✅ Formulaire de recherche (Reactive Forms) avec validation du champ ville obligatoire
+- ✅ Routing Angular avec les routes `/home`, `/weather/:city` et `/about`
+- ✅ Affichage des données météo (ville, pays, température, ressenti, description, humidité, vitesse du vent, icône)
+- ✅ Intégration de l'API OpenWeather via un service Angular dédié (`weather.service.ts`)
+- ✅ Gestion de l'état de l'application (ville, données météo, chargement, erreur)
+- ✅ Découpage en composants (navigation, recherche, affichage météo, pages)
+- ✅ Communication entre composants (`@Input`, `@Output`, services)
+- ✅ Gestion des états de chargement et des erreurs (formulaire vide, ville introuvable, erreur API, erreur 429)
+
+## Fonctionnalités supplémentaires
+
+- 🌍 **Géolocalisation** — récupération automatique de la position de l'utilisateur pour afficher directement la météo de sa ville actuelle
+- 📅 **Prévisions météo** — affichage des prévisions sur plusieurs jours via un second endpoint de l'API OpenWeather
+
+## Architecture
+```
+src/app/
+    ├── components/     → composants réutilisables (navbar, search, weather...)
+    ├── models/         → interfaces / types TypeScript
+    ├── pages/          → composants de pages (home, weather, about...)
+    ├── services/       → services Angular (appels API, gestion d'état)
+    ├── app.config.ts
+    ├── app.routes.ts
+    └── app.ts
+```
+
+## API
+
+- **API utilisée** : [OpenWeather](https://openweathermap.org/api)
+- **Endpoint météo actuelle** : `GET https://api.openweathermap.org/data/2.5/weather?q={ville}&APPID={clé_api}`
+- **Endpoint prévisions** : `GET https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${this.apiKey}&lang=fr&units=metric`
+- **Données récupérées** : nom de la ville, pays, température, température ressentie, description météo, humidité, vitesse du vent, icône
+
+## Postman
+
+Une collection Postman est fournie (`collection_postman`) et regroupe les requêtes suivantes :
+- Current Weather (Paris, Lille, Tokyo)
+- Forecast
+
+Pour l'utiliser : importez le fichier de collection dans Postman, puis renseignez les variables d'environnement `{{base_url}}` et `{{api_key}}` avec votre propre clé OpenWeather.
+
+## Difficultés rencontrées
+
+**Gestion des conflits Git** — travaillant à quatre avec une branche `dev` et une branche par fonctionnalité, nous avons rencontré des conflits lors de la fusion de plusieurs branches développées en parallèle sur les mêmes fichiers. Cela nous a amenés à revoir notre organisation : passage par des pull requests systématiques avec relecture avant fusion, synchronisation plus fréquente avec `dev` pour limiter les divergences, et résolution manuelle des conflits en binôme lorsque nécessaire.
+
+## Améliorations possibles
+
+- Ajouter davantage de fonctionnalités (favoris, comparaison de villes, historique des recherches...)
+- Retravailler et approfondir le style visuel de l'application (charte graphique plus poussée, animations, thème sombre plus abouti)
