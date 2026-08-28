@@ -11,9 +11,15 @@
     </div>
 </form>
 <button type="button" (click)="localiser()" [disabled]="chargement">
-    <span *ngIf="!chargement">📍 Ma position</span>
-    <span *ngIf="chargement" class="spinner"></span>
+    @if (!chargement) {
+        <span>📍 Ma position</span>
+    } @else {
+        <span class="spinner"></span>
+    }
 </button>
-<div *ngIf="erreurVille" class="erreur-message">
-    ⚠️ {{ erreurVille }}
-</div>
+
+@if (erreurVille) {
+    <div class="erreur-message">
+        ⚠️ {{ erreurVille }}
+    </div>
+}
