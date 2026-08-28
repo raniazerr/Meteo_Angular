@@ -98,10 +98,15 @@ src/app/
 
 ## API
 
-- **API utilisée** : [OpenWeather](https://openweathermap.org/api)
+- **API utilisées ** : [OpenWeather](https://openweathermap.org/api) et [Nominatim](https://nominatim.openstreetmap.org)
+
 - **Endpoint météo actuelle** : `GET https://api.openweathermap.org/data/2.5/weather?q={ville}&APPID={clé_api}`
 - **Endpoint prévisions** : `GET https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${this.apiKey}&lang=fr&units=metric`
 - **Données récupérées** : nom de la ville, pays, température, température ressentie, description météo, humidité, vitesse du vent, icône
+
+- **Endpoint cordonnées d'une ville** : `GET https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`
+- **Données récupérées** : Longitude et Latitude de la ville
+
 
 ## Postman
 
