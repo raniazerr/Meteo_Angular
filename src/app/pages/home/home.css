@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #f7f7f9;
+  padding: 40px 20px;
+  color: #1d1d2f;
+}
+
+.home-container {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.home-container h1 {
+  margin: 0 0 30px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #1d1d2f;
+  font-family: 'Arial', sans-serif;
+}

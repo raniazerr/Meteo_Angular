@@ -1,0 +1,25 @@
+<form #searchForm="ngForm" (ngSubmit)="rechercher()" class="search-bar">
+    <div class="search-ville">
+        <input 
+            type="text" 
+            name="ville"
+            [(ngModel)]="nomVille" 
+            required
+            #villeInput="ngModel"
+            placeholder="Rechercher une ville...">
+        <button type="submit">🔍</button>
+    </div>
+</form>
+<button type="button" (click)="localiser()" [disabled]="chargement">
+    @if (!chargement) {
+        <span>📍 Ma position</span>
+    } @else {
+        <span class="spinner"></span>
+    }
+</button>
+
+@if (erreurVille) {
+    <div class="erreur-message">
+        ⚠️ {{ erreurVille }}
+    </div>
+}

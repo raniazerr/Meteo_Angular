@@ -1,0 +1,62 @@
+@if (loading()) {
+  <p>Chargement de la météo...</p>
+}
+
+@if (error()) {
+  <p>{{ error() }}</p>
+}
+
+@if (weather(); as data) {
+  <div class="weather-card">
+
+    <p>{{ data.city }} ({{ data.country }})</p>
+
+    <div>
+      <img
+        [src]="'https://openweathermap.org/img/wn/' + data.icon + '@2x.png'"
+        [alt]="data.description"
+      >
+
+      <p>{{ data.temperature }}°C</p>
+      <p>{{ data.description }}</p>
+    </div>
+
+    <div>
+      <p>Ressenti : {{ data.feelsLike }}°C</p>
+      <p>Humidité : {{ data.humidity }}%</p>
+      <p>Vent : {{ data.windSpeed }} m/s</p>
+    </div>
+
+  </div>
+}
+
+@if (forecast().length > 0) {
+  <section class="forecast-section">
+
+    <h2>Prévisions météo</h2>
+
+    <div class="forecast-grid">
+
+      @for (item of forecast().slice(0, 5); track item.dt) {
+
+        <div class="forecast-card">
+
+          <p>{{ item.dt_txt }}</p>
+
+          <img
+            [src]="'https://openweathermap.org/img/wn/' + item.weather[0].icon + '@2x.png'"
+            [alt]="item.weather[0].description"
+          >
+
+          <p>{{ item.main.temp }}°C</p>
+
+          <p>{{ item.weather[0].description }}</p>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+}
