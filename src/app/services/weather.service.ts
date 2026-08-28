@@ -9,13 +9,13 @@ import { environment } from '../../environments/environment.development';
   providedIn: 'root',
 })
 export class WeatherService {
-
+  url :string = 'https://api.openweathermap.org/data/2.5'
   constructor(private http: HttpClient) {}
 
   private apiKey = environment.API_KEY;
 
   getWeather(city: string): Observable<Weather> {
-    return this.http.get<any>(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.apiKey}&lang=fr&units=metric`)
+    return this.http.get<any>(`${this.url}/weather?q=${city}&appid=${this.apiKey}&lang=fr&units=metric`)
       .pipe(
         map(res => ({
           city: res.name,
@@ -32,7 +32,7 @@ export class WeatherService {
 
    getForecast(city: string): Observable<any> {
     return this.http.get<any>(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${this.apiKey}&lang=fr&units=metric`
+      `${this.url}/forecast?q=${city}&appid=${this.apiKey}&lang=fr&units=metric`
     );
   }
 }
